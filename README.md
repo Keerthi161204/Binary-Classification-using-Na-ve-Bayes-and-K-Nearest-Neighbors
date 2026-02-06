@@ -1,7 +1,7 @@
-# Experiment 4 – Binary Classification using Linear and Kernel-Based Models
+# Experiment 2 – Binary Classification using Naïve Bayes, KNN, and SVM
 
-This repository contains **Experiment 4** from the *Machine Learning Algorithms Laboratory*.  
-The experiment focuses on implementing **Logistic Regression** and **Support Vector Machine (SVM)** classifiers to perform **binary email spam classification**, along with **hyperparameter tuning** and **cross-validation**.
+This repository contains **Experiment 2** from the *Machine Learning Algorithms Laboratory*.  
+The experiment focuses on implementing and evaluating **Naïve Bayes**, **K-Nearest Neighbors (KNN)**, and **Support Vector Machine (SVM)** classifiers for a **binary email spam classification problem**.
 
 ---
 
@@ -9,7 +9,6 @@ The experiment focuses on implementing **Logistic Regression** and **Support Vec
 
 - **Institution:** Sri Sivasubramaniya Nadar College of Engineering, Chennai  
 - **Affiliation:** Anna University  
-- **Student Name:** Keerthana R  
 - **Degree & Branch:** B.E. Computer Science & Engineering  
 - **Semester:** VI  
 - **Subject Code & Name:** UCS2612 – Machine Learning Algorithms Laboratory  
@@ -21,50 +20,48 @@ The experiment focuses on implementing **Logistic Regression** and **Support Vec
 ## 🎯 Aim
 
 To classify emails as **Spam** or **Ham** using:
-- Logistic Regression
+- Naïve Bayes
+- K-Nearest Neighbors (KNN)
 - Support Vector Machine (SVM)
 
-and analyze the effect of **hyperparameter tuning** on classification performance.
-
----
-
-## 📂 Dataset
-
-- **Spambase Dataset**
-- Consists of numerical features extracted from email content
-- Binary target variable:
-  - `0` → Ham (Non-spam)
-  - `1` → Spam
-
----
-
-## 🎯 Objectives
-
-- Implement Logistic Regression and SVM classifiers  
-- Tune hyperparameters using **Grid Search**  
-- Compare **kernel behavior** in SVM  
-- Evaluate models using:
-  - Accuracy
-  - Precision
-  - Recall
-  - F1-score  
-- Perform **5-fold Cross Validation**
+and evaluate their performance using:
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC–AUC
+- K-Fold Cross-Validation
 
 ---
 
 ## 🧰 Libraries Used
 
 - **Pandas** – Data manipulation  
-- **NumPy** – Numerical computation  
+- **NumPy** – Numerical operations  
+- **Scikit-learn** – Model building, preprocessing, evaluation  
 - **Matplotlib** – Visualization  
 - **Seaborn** – Statistical visualization  
-- **Scikit-learn** – Model building, preprocessing, evaluation  
+
+---
+
+## 📂 Dataset Used
+
+- **Spambase Dataset**
+- Binary classification:
+  - `0` → Ham (Not Spam)
+  - `1` → Spam
 
 ---
 
 ## 🤖 Machine Learning Models Used
 
-- **Logistic Regression**
+- **Naïve Bayes**
+  - GaussianNB
+  - MultinomialNB
+  - BernoulliNB
+- **K-Nearest Neighbors (KNN)**
+  - k = 1, 3, 5, 7
+  - KDTree and BallTree
 - **Support Vector Machine (SVM)**
   - Linear kernel
   - Polynomial kernel
@@ -76,34 +73,33 @@ and analyze the effect of **hyperparameter tuning** on classification performanc
 ## 🧪 Experiment Workflow
 
 ### 1️⃣ Data Loading
-- Load Spambase dataset
-- Separate features and target label
+- Load dataset using Pandas
+- Check for missing values
+- Separate features and labels
 
 ### 2️⃣ Data Preprocessing
-- Feature scaling using `StandardScaler`
+- Feature normalization using `StandardScaler`
+- Train–test split with stratification
 
-### 3️⃣ Train–Test Split
-- 80% training data
-- 20% testing data (stratified split)
+### 3️⃣ Exploratory Data Analysis
+- Class distribution bar chart
+- Feature distribution histograms
 
-### 4️⃣ Logistic Regression
-- Baseline Logistic Regression model
-- Hyperparameter tuning using GridSearchCV
+### 4️⃣ Model Training
+- Train Naïve Bayes variants
+- Train KNN with different `k` values
+- Compare KDTree vs BallTree
+- Train SVM with multiple kernels
 
-### 5️⃣ Support Vector Machine
-- Train SVM with different kernels
-- Measure accuracy, F1-score, and training time
-- Hyperparameter tuning using GridSearchCV
+### 5️⃣ Model Evaluation
+- Classification report
+- Confusion matrix
+- ROC curve and AUC score
+- Training time comparison
 
-### 6️⃣ Cross Validation
-- Perform 5-fold cross-validation
-- Compare Logistic Regression and SVM
-
-### 7️⃣ Model Evaluation & Visualization
-- Classification reports
-- Confusion matrices
-- ROC curves
-- Accuracy comparison plots
+### 6️⃣ K-Fold Cross-Validation
+- 5-Fold cross-validation
+- Compare average accuracy across models
 
 ---
 
@@ -118,89 +114,55 @@ and analyze the effect of **hyperparameter tuning** on classification performanc
 
 ---
 
-## ⚙️ Hyperparameter Tuning Results
+## 📈 Output Visualizations
 
-### Table 1: Hyperparameter Tuning Summary
-
-| Model | Search Method | Best Parameters | Best CV Accuracy |
-|------|--------------|-----------------|------------------|
-| Logistic Regression | GridSearch | C, penalty, solver | 0.9315 |
-| SVM | GridSearch | Kernel, C, gamma | 0.9359 |
-
----
-
-## 📈 Logistic Regression Performance
-
-### Table 2: Logistic Regression Metrics
-
-| Metric | Value |
-|------|-------|
-| Accuracy | 0.93 |
-| Precision | 0.93 |
-| Recall | 0.95 |
-| F1 Score | 0.94 |
-
----
-
-## 📊 SVM Kernel-wise Performance
-
-### Table 3: SVM Kernel Comparison
-
-| Kernel | Accuracy | F1 Score |
-|------|----------|----------|
-| Linear | 0.93 | 0.94 |
-| Polynomial | 0.78 | 0.84 |
-| RBF | 0.93 | 0.94 |
-| Sigmoid | 0.88 | 0.90 |
-
----
-
-## 🔁 K-Fold Cross Validation
-
-### Table 4: 5-Fold Cross Validation Results
-
-| Fold | Logistic Regression | SVM |
-|-----|---------------------|-----|
-| Fold 1 | 0.9186 | 0.9349 |
-| Fold 2 | 0.9272 | 0.9337 |
-| Fold 3 | 0.9293 | 0.9228 |
-| Fold 4 | 0.9315 | 0.9359 |
-| Fold 5 | 0.9315 | 0.9304 |
-| **Average** | **0.9293** | **0.9337** |
-
----
-
-## 📷 Output Visualizations
-
-- Logistic Regression confusion matrix  
-- Logistic Regression ROC curve  
-- SVM confusion matrix  
-- SVM ROC curve  
-- SVM kernel-wise comparison plots  
-- Cross-validation accuracy comparison bar chart  
+- Class distribution bar chart  
+- Feature distribution histograms  
+- Confusion matrices for all models  
+- ROC curves with AUC values  
+- KNN tree comparison plots  
+- SVM kernel-wise performance table  
+- 5-Fold cross-validation results  
 
 ---
 
 ## 🔍 Observations
 
-- **Linear SVM** achieved the best overall performance
-- Regularization improved Logistic Regression generalization
-- SVM kernel choice significantly influenced performance
-- Polynomial kernel performed poorly compared to Linear and RBF kernels
+### ✅ Best Classifier
+- **SVM (Linear Kernel)** achieved the **highest average accuracy: 0.9274**
+
+### ✅ Best Naïve Bayes Variant
+- **Bernoulli Naïve Bayes**
+  - Accuracy: 0.8863
+  - Highest AUC among NB variants
+
+### ✅ KNN Performance
+- Accuracy improved as `k` increased
+- Best results at `k = 7`
+- KDTree and BallTree gave similar accuracy
+- BallTree trained slightly faster
+
+### ✅ Best SVM Kernel
+- **Linear kernel** performed best overall
+- RBF kernel was a close second
+- Polynomial kernel performed poorly
+
+### ✅ Hyperparameter Influence
+- KNN accuracy highly dependent on `k`
+- SVM performance strongly dependent on kernel choice
 
 ---
 
 ## 🧠 Learning Outcomes
 
-From this experiment, students learned:
+From this experiment, we learned:
 
-- How linear and kernel-based classifiers work
-- Practical implementation of Logistic Regression and SVM
-- Hyperparameter tuning using GridSearchCV
-- Model evaluation using multiple metrics
-- Interpretation of confusion matrices and ROC curves
-- Importance of cross-validation in performance estimation
-- Comparative analysis of classifiers
+- Practical implementation of Naïve Bayes, KNN, and SVM
+- Importance of feature scaling and preprocessing
+- Effect of hyperparameters on model performance
+- Use of evaluation metrics beyond accuracy
+- Visualization using confusion matrices and ROC curves
+- Importance of K-fold cross-validation
+- Comparative analysis of multiple classifiers
 
 ---
-
